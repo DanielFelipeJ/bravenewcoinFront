@@ -1,0 +1,64 @@
+<app-navbar></app-navbar>
+<app-loading *ngIf="loading"></app-loading>
+<div class="container text-center">
+  <div *ngIf="isLogged else loggedOut"><h2>{{"WELCOME" | translate}} {{user.name}} {{user.lastname}}</h2>
+    <div class="form-group col">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h3 *ngIf="preferredBrave != null">{{"PREFERRED_COIN" | translate}}: {{preferredBrave.name}}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <div *ngIf="userBraves?.length == 0" class="alert alert-info">
+              {{"USER_HAS_NO_CURRENCIES" | translate}}
+            </div>
+            <div class="my-2 text-left">
+              <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/add-coins']">{{ "ADD_COIN" | translate }}</button>
+              <button class="btn btn-rounded btn-primary mx-2" type="button" [routerLink]="['/select-coins']">{{"SET_FAVORITE" | translate}}</button>
+            </div>
+            <h5>{{"USER_COINS" | translate}}</h5>
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>{{"NAME" | translate}}</th>
+                <th>{{"VALUE" | translate}} ($)</th>
+                <th>{{"SYMBOL" | translate}}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let brave of userBraves">
+                <td>{{brave.name}}</td>
+                <td>{{brave.value}}</td>
+                <td>{{brave.symbol}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <br>
+            <h5>{{"TOP_3" | translate}}</h5>
+            <table class="table table-striped" >
+              <thead>
+              <tr>
+                <th>{{"NAME" | translate}}</th>
+                <th *ngIf="preferredBrave != null">{{"VALUE" | translate}} ({{preferredBrave.symbol}})</th>
+                <th>{{"SYMBOL" | translate}}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let brave of userTopBraves">
+                <td>{{brave.name}}</td>
+                <td>{{brave.value}}</td>
+                <td>{{brave.symbol}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #loggedOut><h2>{{"NOT_LOGGED" | translate}}</h2></ng-template>
+</div>

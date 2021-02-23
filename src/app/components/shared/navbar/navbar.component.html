@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand navbar-light bg-light mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand"><img [src]="logoBancolombia" alt="" width="80" height="35"></a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="nav navbar-nav mr-auto">
+      <li class="nav-item m-2">
+          <span>
+            <img *ngIf="translateband" [src]="logoColombia" alt="" width="40" height="20">
+            <img *ngIf="!translateband" [src]="logoUsa" alt="" width="40" height="20">
+            <select  class="form-select" class="lenguajes" #selectedLang (change)="switchLang(selectedLang.value)">
+              <option *ngFor="let language of translate.getLangs()" [value]="language"
+                      [selected]="language === translate.currentLang">
+                {{ language }}
+              </option>
+            </select>
+          </span>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="cursor: pointer" routerLink="/"><i class="bi bi-house-fill"></i> {{ "HOME" | translate }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="cursor: pointer" routerLink="/coins"><i class="bi bi-gem"></i> {{ "COINS" | translate }}</a>
+      </li>
+      <li class="nav-item">
+        <a *ngIf="islogged" class="nav-link" style="cursor: pointer" routerLink="/user"><i class="bi bi-person-circle"></i> {{ "USER" | translate }}</a>
+        <a *ngIf="!islogged" class="nav-link" style="cursor: pointer" routerLink="/login"><i class="bi bi-person-circle"></i> {{ "USER" | translate }}</a>
+      </li>
+    </ul>
+    </div>
+    <button class="btn btn-outline-success col-2 btn-sm" routerLink="/login" *ngIf="!islogged"><i class="bi bi-cursor"></i> {{ "LOGIN" | translate }}</button>
+    <div *ngIf="islogged" class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ name + ' ' + lastname }}
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <li><a class="dropdown-item" style="cursor: pointer" (click)="onLogOut()"><i class="bi bi-x-circle"></i> Cerrar Sesión</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

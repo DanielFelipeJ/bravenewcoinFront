@@ -1,0 +1,51 @@
+<app-loading *ngIf="loading"></app-loading>
+<div class="change-container">
+
+  <form [formGroup]="form" (ngSubmit)="exchangeValues()">
+    <h1>{{"MAKE_CHANGES2" | translate}}</h1>
+    <h2>{{"SELECT_COINS" | translate}}</h2>
+    <div class="row">
+      <div class="col-xs">
+        <mat-form-field appearance="outline">
+          <input placeholder="0,00" formControlName="amount" matInput type="number" (change)="convertCurrencies()"/>
+          <span matPrefix>$&nbsp;</span>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs">
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="currencyFrom" (selectionChange)="convertCurrencies()">
+            <mat-option *ngFor="let currency of currencies" [value]="currency.symbol">
+              {{ currency.symbol }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="button-container">
+      <button mat-icon-button type="submit">
+        <img class="png-icon" src="../../assets/img/exchange.png" />
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-xs" appearance="outline">
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="currencyTo" (selectionChange)="convertCurrencies()">
+            <mat-option *ngFor="let currency of currencies" [value]="currency.symbol" >
+              {{ currency.symbol }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs">
+        <mat-form-field appearance="outline">
+          <input formControlName="result" matInput type="text" readonly />
+          <span matPrefix>$&nbsp;</span>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<div class="main-container">
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link *ngFor="let link of links" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive"
+       [active]="rla.isActive">
+      {{link.label | translate}}
+    </a>
+  </nav>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</div>
+
+

@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+<app-loading *ngIf="loading"></app-loading>
+
+<h5>{{"USER_COINS" | translate}}</h5>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>{{"NAME" | translate}}</th>
+    <th>{{"VALUE" | translate}} ($)</th>
+    <th>{{"SYMBOL" | translate}}</th>
+    <th>{{"PREFERRED" | translate}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let currency of userBraves">
+    <td>{{currency.name}}</td>
+    <td>{{currency.value}}</td>
+    <td>{{currency.symbol}}</td>
+    <td><button class="btn btn-outline-primary" (click)="selectCoin(currency)"><i class="bi bi-check2-circle"></i> {{"SELECT" | translate}}</button></td>
+  </tr>
+  </tbody>
+</table>
